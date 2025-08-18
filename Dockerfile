@@ -4,6 +4,11 @@ FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 # Set working directory
 WORKDIR /app
 
+# Configure timezone and package installation
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
