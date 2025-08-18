@@ -4,6 +4,11 @@ FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 # Set working directory
 WORKDIR /app
 
+# Accept proxy arguments
+ARG http_proxy
+ARG https_proxy
+ARG no_proxy
+
 # Configure timezone and package installation
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
