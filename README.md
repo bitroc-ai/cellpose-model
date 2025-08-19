@@ -34,6 +34,10 @@ Docker setup for training custom Cellpose models with GPU support.
 - Trained models saved to `./models/`
 - Training logs available in container output
 
+## Performance
+
+- Training time: ~1 hour on RTX 4090 D with default settings (100 epochs, 540 training images)
+
 ## Requirements
 
 - NVIDIA Docker runtime
