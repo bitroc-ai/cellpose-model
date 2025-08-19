@@ -48,16 +48,17 @@ def main():
 
     # Load images
     print("Loading training images...")
-    train_images = io.load_train_test_data(str(train_dir), str(test_dir), mask_filter='_masks', image_filter='_img')
+    output = io.load_train_test_data(str(train_dir), str(test_dir), mask_filter='_masks', image_filter='_img')
+    images, labels, image_names, test_images, test_labels, image_names_test = output
 
-    if len(train_images[0]) == 0:
+    if len(images) == 0:
         print("Error: No training images found. Make sure images and masks follow naming convention:")
         print("  - Images: ###_img.png (e.g., 000_img.png)")
         print("  - Masks: ###_masks.png (e.g., 000_masks.png)")
         sys.exit(1)
 
-    print(f"Found {len(train_images[0])} training images")
-    print(f"Found {len(train_images[1])} test images")
+    print(f"Found {len(images)} training images")
+    print(f"Found {len(test_images)} test images")
 
     # Initialize model
     print(f"Initializing model from {args.pretrained_model}...")
@@ -67,10 +68,10 @@ def main():
     print("Starting training...")
     model_path, train_losses, test_losses = train.train_seg(
         model.net,
-        train_data=train_images[0],
-        train_labels=train_images[1],
-        test_data=train_images[2],
-        test_labels=train_images[3],
+        train_data=images,
+        train_labels=labels,
+        test_data=test_images,
+        test_labels=test_labels,
         normalize=True,
         weight_decay=args.weight_decay,
         learning_rate=args.learning_rate,
