@@ -68,7 +68,6 @@ def main():
         train_labels=train_images[1],
         test_data=train_images[2],
         test_labels=train_images[3],
-        channels=[args.chan, args.chan2],
         normalize=True,
         weight_decay=args.weight_decay,
         learning_rate=args.learning_rate,
