@@ -3,6 +3,7 @@ import os
 import sys
 import argparse
 from pathlib import Path
+import torch
 from cellpose import models, io, train
 
 
@@ -20,6 +21,15 @@ def main():
     parser.add_argument('--pretrained_model', default='cpsam', help='Pretrained model to start from')
 
     args = parser.parse_args()
+
+    # Check GPU availability
+    print(f"CUDA available: {torch.cuda.is_available()}")
+    if torch.cuda.is_available():
+        print(f"GPU count: {torch.cuda.device_count()}")
+        print(f"Current GPU: {torch.cuda.current_device()}")
+        print(f"GPU name: {torch.cuda.get_device_name()}")
+    else:
+        print("WARNING: CUDA not available, training will use CPU (very slow)")
 
     # Verify directories exist
     train_dir = Path(args.train_dir)
