@@ -48,12 +48,6 @@ def main():
 
     # Load images
     print("Loading training images...")
-    
-    # Count files manually first for verification
-    train_imgs = list(Path(train_dir).glob('*_img.png'))
-    test_imgs = list(Path(test_dir).glob('*_img.png'))
-    print(f"Manual count - Training images: {len(train_imgs)}, Test images: {len(test_imgs)}")
-    
     train_images = io.load_train_test_data(str(train_dir), str(test_dir), mask_filter='_masks', image_filter='_img')
 
     if len(train_images[0]) == 0:
@@ -62,8 +56,8 @@ def main():
         print("  - Masks: ###_masks.png (e.g., 000_masks.png)")
         sys.exit(1)
 
-    print(f"Cellpose loaded - Training: {len(train_images[0])} images, Test: {len(train_images[2])} images")
-    print(f"Train labels: {len(train_images[1])}, Test labels: {len(train_images[3])}")
+    print(f"Found {len(train_images[0])} training images")
+    print(f"Found {len(train_images[1])} test images")
 
     # Initialize model
     print(f"Initializing model from {args.pretrained_model}...")
