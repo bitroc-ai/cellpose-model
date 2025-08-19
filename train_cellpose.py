@@ -83,7 +83,7 @@ def main():
 
     print(f"Training completed! Model saved to: {model_path}")
     print(f"Final training loss: {train_losses[-1]:.6f}")
-    if test_losses:
+    if test_losses is not None and len(test_losses) > 0:
         print(f"Final test loss: {test_losses[-1]:.6f}")
 
 
