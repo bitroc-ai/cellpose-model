@@ -43,6 +43,9 @@ def main():
         print(f"Warning: Test directory {test_dir} does not exist, using train dir for validation")
         test_dir = train_dir
 
+    print(f"Training directory: {train_dir}")
+    print(f"Test directory: {test_dir}")
+
     # Load images
     print("Loading training images...")
     train_images = io.load_train_test_data(str(train_dir), str(test_dir), mask_filter='_masks', image_filter='_img')
